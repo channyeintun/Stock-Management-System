@@ -51,7 +51,7 @@ public class DbConfigLoader {
             prop.setProperty("user", dbConfig.getUser());
             prop.setProperty("password", dbConfig.getPassword());
 
-            prop.store(os, "User Properties");
+            prop.store(os, "Database Configurations");
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
