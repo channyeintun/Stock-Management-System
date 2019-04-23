@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package stock.management.system.controllers;
 
 import java.net.URL;
@@ -22,7 +18,7 @@ import stock.management.system.model.Product;
 /**
  * FXML Controller class
  *
- * @author Sithu
+ * @author Chan Nyein Tun
  */
 public class LowStockController implements Initializable {
 
@@ -46,7 +42,11 @@ public class LowStockController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         productDAO = new ProductDAO();
         initCOlumns();
-        loadTableData();
+        try {
+            loadTableData();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LowStockController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void initCOlumns() {
@@ -56,7 +56,7 @@ public class LowStockController implements Initializable {
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
     }
 
-    private void loadTableData() {
+    private void loadTableData() throws ClassNotFoundException {
         try {
             List<Product> products = productDAO.getLowStockProducts();
             productTable.getItems().setAll(products);

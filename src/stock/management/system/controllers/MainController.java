@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stock.management.system.controllers;
 
 import java.io.IOException;
@@ -24,7 +19,7 @@ import stock.management.system.dao.ProductDAO;
 
 /**
  *
- * @author Sithu
+ * @author Chan Nyein Tun
  */
 public class MainController implements Initializable {
 
@@ -32,10 +27,10 @@ public class MainController implements Initializable {
     private Button dashboradBtn;
     @FXML
     private Button productsBtn;
-    
+
     @FXML
     private HBox dashboardView;
-    
+
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -48,26 +43,32 @@ public class MainController implements Initializable {
     private Label productLabel;
     @FXML
     private Label lowStockLabel;
-    
+
     private ProductDAO productDAO;
-    
+    @FXML
+    private Button settingsBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dashboradBtn.setStyle("-fx-background-color:#00acc1");
         productDAO = new ProductDAO();
-        loadDashboardData();   
-    }    
+        try {
+            loadDashboardData();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @FXML
-    private void showDashboardView(ActionEvent event) {
-        
+    private void showDashboardView(ActionEvent event) throws ClassNotFoundException {
+
         dashboradBtn.setStyle("-fx-background-color:#00acc1");
         inoutBtn.setStyle("-fx-background-color:transparent");
         productsBtn.setStyle("-fx-background-color:transparent");
         lowStockBtn.setStyle("-fx-background-color:transparent");
         transactionBtn.setStyle("-fx-background-color:transparent");
-        
+        settingsBtn.setStyle("-fx-background-color:transparent");
+
         borderPane.setCenter(dashboardView);
         loadDashboardData();
     }
@@ -79,9 +80,10 @@ public class MainController implements Initializable {
         productsBtn.setStyle("-fx-background-color:#00acc1");
         lowStockBtn.setStyle("-fx-background-color:transparent");
         transactionBtn.setStyle("-fx-background-color:transparent");
+        settingsBtn.setStyle("-fx-background-color:transparent");
         Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/products.fxml"));
         borderPane.setCenter(root);
-        
+
     }
 
     @FXML
@@ -91,9 +93,10 @@ public class MainController implements Initializable {
         productsBtn.setStyle("-fx-background-color:transparent");
         lowStockBtn.setStyle("-fx-background-color:transparent");
         transactionBtn.setStyle("-fx-background-color:transparent");
+        settingsBtn.setStyle("-fx-background-color:transparent");
         Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/inout.fxml"));
         borderPane.setCenter(root);
-        
+
     }
 
     @FXML
@@ -103,8 +106,9 @@ public class MainController implements Initializable {
         productsBtn.setStyle("-fx-background-color:transparent");
         lowStockBtn.setStyle("-fx-background-color:#00acc1");
         transactionBtn.setStyle("-fx-background-color:transparent");
+        settingsBtn.setStyle("-fx-background-color:transparent");
         Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/lowstock.fxml"));
-        borderPane.setCenter(root);  
+        borderPane.setCenter(root);
     }
 
     @FXML
@@ -114,11 +118,12 @@ public class MainController implements Initializable {
         productsBtn.setStyle("-fx-background-color:transparent");
         lowStockBtn.setStyle("-fx-background-color:transparent");
         transactionBtn.setStyle("-fx-background-color:#00acc1");
+        settingsBtn.setStyle("-fx-background-color:transparent");
         Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/transactions.fxml"));
         borderPane.setCenter(root);
     }
 
-    private void loadDashboardData() {
+    private void loadDashboardData() throws ClassNotFoundException {
         try {
             int productCount = productDAO.countProducts();
             int lowStockCount = productDAO.countLowStockProducts();
@@ -128,5 +133,17 @@ public class MainController implements Initializable {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    @FXML
+    private void showSettingView(ActionEvent event) throws IOException {
+        dashboradBtn.setStyle("-fx-background-color:transparent");
+        inoutBtn.setStyle("-fx-background-color:transparent");
+        productsBtn.setStyle("-fx-background-color:transparent");
+        lowStockBtn.setStyle("-fx-background-color:transparent");
+        transactionBtn.setStyle("-fx-background-color:transparent");
+        settingsBtn.setStyle("-fx-background-color:#00acc1");
+        Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/dbconfig.fxml"));
+        borderPane.setCenter(root);
+    }
+
 }

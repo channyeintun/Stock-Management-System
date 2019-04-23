@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package stock.management.system.dao;
 
@@ -17,12 +15,12 @@ import stock.management.system.model.Product;
 
 /**
  *
- * @author Sithu
+ * @author Chan Nyein Tun
  */
 public class ProductDAO {
 
     // CRUD
-    public int save(Product product) throws SQLException {
+    public int save(Product product) throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "insert into smsdb.products (id,name,price,stock) value (?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -34,7 +32,7 @@ public class ProductDAO {
         return rows;
     }
 
-    public List<Product> getProducts() throws SQLException {
+    public List<Product> getProducts() throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "select * from smsdb.products";
         Statement stmt = conn.createStatement();
@@ -51,7 +49,7 @@ public class ProductDAO {
         return products;
     }
 
-    public List<Product> getLowStockProducts() throws SQLException {
+    public List<Product> getLowStockProducts() throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "select * from smsdb.products where stock <= 5";
         Statement stmt = conn.createStatement();
@@ -68,7 +66,7 @@ public class ProductDAO {
         return products;
     }
 
-    public Product getProduct(int id) throws SQLException {
+    public Product getProduct(int id) throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "select * from smsdb.products where id=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -84,7 +82,7 @@ public class ProductDAO {
         return product;
     }
 
-    public int updateProduct(Product product) throws SQLException {
+    public int updateProduct(Product product) throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "update smsdb.products set name=?,price=?,stock=? where id=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -96,7 +94,7 @@ public class ProductDAO {
         return rows;
     }
 
-    public int deleteProduct(int id) throws SQLException {
+    public int deleteProduct(int id) throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "delete from smsdb.products where id=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -105,7 +103,7 @@ public class ProductDAO {
         return rows;
     }
 
-    public List<Product> getProductsByName(String query) throws SQLException {
+    public List<Product> getProductsByName(String query) throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "select * from smsdb.products where name like ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -123,7 +121,7 @@ public class ProductDAO {
         return products;
     }
 
-    public boolean isProductExist(int id) throws SQLException {
+    public boolean isProductExist(int id) throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "select count(*) as count from smsdb.products where id=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -139,7 +137,7 @@ public class ProductDAO {
         return true;
     }
 
-    public int countProducts() throws SQLException {
+    public int countProducts() throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "select count(*) as count from smsdb.products";
         Statement stmt = conn.createStatement();
@@ -151,7 +149,7 @@ public class ProductDAO {
         return count;
     }
 
-    public int countLowStockProducts() throws SQLException {
+    public int countLowStockProducts() throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "select count(*) as count from smsdb.products where stock<=5";
         Statement stmt = conn.createStatement();

@@ -1,18 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stock.management.system.model;
 
-import java.sql.Date;
-
-/**
- *
- * @author Sithu
- */
 public class Transaction {
-    
+
     private int id;
     private String type;
     private int productId;
@@ -29,8 +18,6 @@ public class Transaction {
         this.remark = remark;
         this.datetime = datetime;
     }
-    
-    
 
     public Transaction(String type, int productId, int quantity, String remark) {
         this.type = type;
@@ -47,8 +34,6 @@ public class Transaction {
         this.remark = remark;
         this.datetime = datetime;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -73,8 +58,6 @@ public class Transaction {
     public void setProductId(int productId) {
         this.productId = productId;
     }
-
-   
 
     public int getQuantity() {
         return quantity;
@@ -108,10 +91,4 @@ public class Transaction {
         this.productName = productName;
     }
 
-   
-    
-    
-    
-    
-    
 }

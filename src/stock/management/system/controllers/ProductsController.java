@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package stock.management.system.controllers;
 
 import com.jfoenix.controls.JFXTextField;
@@ -38,7 +34,7 @@ import stock.management.system.model.Product;
 /**
  * FXML Controller class
  *
- * @author Sithu
+ * @author Chan Nyein Tun
  */
 public class ProductsController implements Initializable {
 
@@ -76,12 +72,16 @@ public class ProductsController implements Initializable {
         initColumns();
         
         
-        loadTableData();
+        try {
+            loadTableData();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
     @FXML
-    private void loadNewProductWindow(ActionEvent event) throws IOException {
+    private void loadNewProductWindow(ActionEvent event) throws IOException, ClassNotFoundException {
         Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/newproduct.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -99,7 +99,7 @@ public class ProductsController implements Initializable {
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
     }
 
-    private void loadTableData() {
+    private void loadTableData() throws ClassNotFoundException {
         try {
             List<Product> products = productDAO.getProducts();
             productTable.getItems().setAll(products);
@@ -109,12 +109,12 @@ public class ProductsController implements Initializable {
     }
 
     @FXML
-    private void deleteProduct(ActionEvent event) {
+    private void deleteProduct(ActionEvent event) throws ClassNotFoundException {
 
-        // Get Selected Item
+      
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
 
-        // Validating
+    
         if (selectedProduct == null) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setContentText("Please select the item you want to delete.");
@@ -140,7 +140,7 @@ public class ProductsController implements Initializable {
     }
 
     @FXML
-    private void updateProductName(TableColumn.CellEditEvent<Product, String> event) {
+    private void updateProductName(TableColumn.CellEditEvent<Product, String> event) throws ClassNotFoundException {
        
         Product product = event.getRowValue();
         product.setName(event.getNewValue());
@@ -154,7 +154,7 @@ public class ProductsController implements Initializable {
     }
 
     @FXML
-    private void updateProductPrice(TableColumn.CellEditEvent<Product, Double> event) {
+    private void updateProductPrice(TableColumn.CellEditEvent<Product, Double> event) throws ClassNotFoundException {
        
          Product product = event.getRowValue();
          product.setPrice(event.getNewValue());
@@ -169,7 +169,7 @@ public class ProductsController implements Initializable {
     }
 
     @FXML
-    private void searchProductByName(ActionEvent event) {
+    private void searchProductByName(ActionEvent event) throws ClassNotFoundException {
        String query = nameSearchField.getText();
        
         try {

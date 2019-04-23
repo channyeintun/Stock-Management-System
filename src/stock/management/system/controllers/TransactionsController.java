@@ -1,16 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package stock.management.system.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import java.io.InputStream;
+
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,6 +22,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import stock.management.system.dao.TransactionDAO;
 import stock.management.system.model.Transaction;
 import stock.management.system.util.MessageBox;
@@ -28,7 +36,7 @@ import stock.management.system.util.MessageBox;
 /**
  * FXML Controller class
  *
- * @author Sithu
+ * @author Chan Nyein Tun   
  */
 public class TransactionsController implements Initializable {
 
@@ -54,6 +62,8 @@ public class TransactionsController implements Initializable {
     private TableColumn<Transaction, String> remarkColumn;
 
     private TransactionDAO transactionDAO;
+    @FXML
+    private JFXButton reportBtn;
 
     /**
      * Initializes the controller class.
@@ -65,12 +75,12 @@ public class TransactionsController implements Initializable {
     }
 
     @FXML
-    private void loadTransactions(ActionEvent event) {
-        // Get Start date and end date
+    private void loadTransactions(ActionEvent event) throws ClassNotFoundException {
+       
         LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
 
-        // validating
+        
         if (startDate == null || endDate == null) {
             MessageBox.showErrorMessage("Error", "Select the start date and end date.");
             return;
@@ -78,7 +88,7 @@ public class TransactionsController implements Initializable {
         Date startSqlDate = Date.valueOf(startDate);
         Date endSqlDate = Date.valueOf(endDate.plusDays(1));
         try {
-            // get Table Data using start date and end date
+           
             List<Transaction> transactions = transactionDAO.getTransactions(startSqlDate,endSqlDate);
             transactionTable.getItems().setAll(transactions);
         } catch (SQLException ex) {
@@ -93,6 +103,28 @@ public class TransactionsController implements Initializable {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("datetime"));
         remarkColumn.setCellValueFactory(new PropertyValueFactory<>("remark"));
+    }
+
+    @FXML
+    private void getReport(ActionEvent event) throws SQLException, ClassNotFoundException, JRException, UnsupportedEncodingException {
+         LocalDate startDate = startDatePicker.getValue();
+        LocalDate endDate = endDatePicker.getValue();
+
+        // validating
+        if (startDate == null || endDate == null) {
+            MessageBox.showErrorMessage("Error", "Select the start date and end date.");
+            return;
+        }
+        Date startSqlDate = Date.valueOf(startDate);
+        Date endSqlDate = Date.valueOf(endDate.plusDays(1));
+        ResultSet resultSet=transactionDAO.getTransactionResultSet(startSqlDate, endSqlDate);
+        JRResultSetDataSource reportSource=new JRResultSetDataSource(resultSet);
+        InputStream is=this.getClass().getResourceAsStream("/stock/management/system/report/report1.jrxml");
+     
+        JasperReport jasperReport = JasperCompileManager.compileReport(is);
+        JasperPrint jprint=JasperFillManager.fillReport(jasperReport,new HashMap(),reportSource);
+        JasperViewer reportViewer=new JasperViewer(jprint,false);
+        reportViewer.setVisible(true);
     }
 
 }

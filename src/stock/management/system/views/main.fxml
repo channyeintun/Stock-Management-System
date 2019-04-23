@@ -83,6 +83,17 @@
                         <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
                      </VBox.margin>
                   </Button>
+                  <Button fx:id="settingsBtn" alignment="BASELINE_LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#showSettingView" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-btn" text="Settings">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="24.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="COGS" size="14" styleClass="sidebar-icon" />
+                     </graphic>
+                  </Button>
                </children>
             </VBox>
          </left>

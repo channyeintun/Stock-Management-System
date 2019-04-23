@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package stock.management.system.controllers;
 
 import com.jfoenix.controls.JFXTextField;
@@ -22,7 +18,7 @@ import stock.management.system.model.Product;
 /**
  * FXML Controller class
  *
- * @author Sithu
+ * @author Chan Nyein Tun
  */
 public class NewproductController implements Initializable {
 
@@ -54,13 +50,13 @@ public class NewproductController implements Initializable {
     }
 
     @FXML
-    private void saveNewProduct(ActionEvent event) {
-        // Getting Data
+    private void saveNewProduct(ActionEvent event) throws ClassNotFoundException {
+       
         String name = nameField.getText();
         String idStr = idField.getText();
         String priceStr = priceField.getText();
 
-        // Validating 
+       
         if (name.isEmpty() || idStr.isEmpty() || priceStr.isEmpty()) {
             System.out.println("Please Fill out all required fields.");
             return;
@@ -79,7 +75,7 @@ public class NewproductController implements Initializable {
             System.out.println("Error,Duplicat ID.");
             Logger.getLogger(NewproductController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // Saving
+       
     }
 
 }

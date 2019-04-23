@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package stock.management.system.controllers;
 
 import com.jfoenix.controls.JFXButton;
@@ -15,8 +11,6 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import stock.management.system.dao.ProductDAO;
@@ -28,7 +22,7 @@ import stock.management.system.util.MessageBox;
 /**
  * FXML Controller class
  *
- * @author Sithu
+ * @author Chan Nyein Tun
  */
 public class InoutController implements Initializable {
 
@@ -63,9 +57,9 @@ public class InoutController implements Initializable {
     }
 
     @FXML
-    private void saveTransaction(ActionEvent event) {
+    private void saveTransaction(ActionEvent event) throws ClassNotFoundException {
 
-        // Get Data
+      
         String productIdStr = productIdField.getText();
         String quantityStr = quantityField.getText();
         String remark = remarkField.getText();
@@ -98,7 +92,6 @@ public class InoutController implements Initializable {
                         return;
                     }
                 }
-                 // continue saving process.
                 Transaction transaction = new Transaction(type, productId, quantity, remark);
                 transactionDAO.saveTransaction(transaction);
                 MessageBox.showInformationMessage("Success", "Successfully saved.");
