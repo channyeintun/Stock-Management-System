@@ -16,11 +16,11 @@
    <children>
       <BorderPane fx:id="borderPane" prefHeight="550.0" prefWidth="950.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <VBox prefHeight="200.0" prefWidth="180.0" style="-fx-background-color: #424242;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="550.0" prefWidth="180.0" style="-fx-background-color: #5E6366;" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="BANK" size="18.0" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="BANK" size="18.0" styleClass="sidebar-icon" />
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SMS">
                            <font>
                               <Font size="18.0" />
@@ -36,7 +36,7 @@
                         <Insets left="24.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
+                        <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
                   <Button fx:id="inoutBtn" alignment="BASELINE_LEFT" graphicTextGap="12.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showInoutView" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-btn" text="In / Out">
@@ -47,7 +47,7 @@
                         <Insets left="24.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
+                        <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
                   <Button fx:id="productsBtn" alignment="BASELINE_LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#showProductsView" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-btn" text="Products">
@@ -58,7 +58,7 @@
                         <Insets left="24.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
+                        <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
                   <Button fx:id="lowStockBtn" alignment="BASELINE_LEFT" graphicTextGap="12.0" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#showLowStockView" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-btn" text="Low Stock">
@@ -69,7 +69,7 @@
                         <Insets left="24.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
+                        <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
                   <Button fx:id="transactionBtn" alignment="BASELINE_LEFT" graphicTextGap="12.0" layoutX="10.0" layoutY="145.0" mnemonicParsing="false" onAction="#showTransactionView" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-btn" text="Transactions">
@@ -80,12 +80,12 @@
                         <Insets left="24.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
+                        <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
                   <Button fx:id="settingsBtn" alignment="BASELINE_LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#showSettingView" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-btn" text="Settings">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
+                        <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                      <padding>
                         <Insets left="24.0" />
@@ -102,9 +102,9 @@
                <children>
                   <HBox maxHeight="100.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #00acc1;">
+                        <AnchorPane prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow;">
                            <children>
-                              <FontAwesomeIconView fill="WHITE" glyphName="CUBES" layoutX="36.0" layoutY="57.0" size="22.0" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="CUBES" layoutX="36.0" layoutY="57.0" size="22.0" style="-fx-fill: black;" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fff;">
@@ -124,9 +124,9 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" maxHeight="100.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ff9800;">
+                        <AnchorPane prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #84F8B5;">
                            <children>
-                              <FontAwesomeIconView fill="WHITE" glyphName="BELL" layoutX="36.0" layoutY="57.0" size="22.0" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="BELL" layoutX="36.0" layoutY="57.0" size="22.0" style="-fx-fill: black;" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fff;">

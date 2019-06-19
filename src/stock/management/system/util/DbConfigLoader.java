@@ -30,11 +30,9 @@ public class DbConfigLoader {
             dbConfig = new DbConfig(host, Integer.parseInt(port), user, password);
 
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+          
         }
 
         return dbConfig;

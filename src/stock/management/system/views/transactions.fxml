@@ -20,8 +20,8 @@
             <JFXDatePicker fx:id="startDatePicker" />
             <Label text="To:" />
             <JFXDatePicker fx:id="endDatePicker" />
-            <JFXButton fx:id="submitBtn" onAction="#loadTransactions" prefHeight="31.0" prefWidth="75.0" text="Submit" />
-            <JFXButton fx:id="reportBtn" onAction="#getReport" prefHeight="31.0" prefWidth="75.0" text="Report" />
+            <JFXButton fx:id="submitBtn" onAction="#loadTransactions" prefHeight="31.0" prefWidth="75.0" style="-fx-background-color: #008080;" text="Submit" textFill="WHITE" />
+            <JFXButton fx:id="reportBtn" onAction="#getReport" prefHeight="31.0" prefWidth="75.0" style="-fx-background-color: #008080;" text="Report" textFill="WHITE" />
          </children>
       </HBox>
       <TableView fx:id="transactionTable" prefHeight="470.0" prefWidth="200.0">

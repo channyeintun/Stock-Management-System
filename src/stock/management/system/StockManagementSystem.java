@@ -5,13 +5,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import stock.management.system.database.Database;
 
-/**
- *
- * @author Chan Nyein Tun
- */
+
 public class StockManagementSystem extends Application {
     
     @Override
@@ -23,6 +20,7 @@ public class StockManagementSystem extends Application {
         
         stage.setScene(scene);
         stage.setTitle("Stock Management System");
+        stage.getIcons().add(new Image(StockManagementSystem.class.getResourceAsStream("/stock/management/system/logo/logo.png")));
         stage.show();
     }
 

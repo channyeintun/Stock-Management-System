@@ -50,7 +50,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        dashboradBtn.setStyle("-fx-background-color:#00acc1");
+        dashboradBtn.setStyle("-fx-background-color:#3E4345");
         productDAO = new ProductDAO();
         try {
             loadDashboardData();
@@ -62,7 +62,7 @@ public class MainController implements Initializable {
     @FXML
     private void showDashboardView(ActionEvent event) throws ClassNotFoundException {
 
-        dashboradBtn.setStyle("-fx-background-color:#00acc1");
+        dashboradBtn.setStyle("-fx-background-color:#3E4345");
         inoutBtn.setStyle("-fx-background-color:transparent");
         productsBtn.setStyle("-fx-background-color:transparent");
         lowStockBtn.setStyle("-fx-background-color:transparent");
@@ -77,7 +77,7 @@ public class MainController implements Initializable {
     private void showProductsView(ActionEvent event) throws IOException {
         dashboradBtn.setStyle("-fx-background-color:transparent");
         inoutBtn.setStyle("-fx-background-color:transparent");
-        productsBtn.setStyle("-fx-background-color:#00acc1");
+        productsBtn.setStyle("-fx-background-color:#3E4345");
         lowStockBtn.setStyle("-fx-background-color:transparent");
         transactionBtn.setStyle("-fx-background-color:transparent");
         settingsBtn.setStyle("-fx-background-color:transparent");
@@ -89,7 +89,7 @@ public class MainController implements Initializable {
     @FXML
     private void showInoutView(ActionEvent event) throws IOException {
         dashboradBtn.setStyle("-fx-background-color:transparent");
-        inoutBtn.setStyle("-fx-background-color:#00acc1");
+        inoutBtn.setStyle("-fx-background-color:#3E4345");
         productsBtn.setStyle("-fx-background-color:transparent");
         lowStockBtn.setStyle("-fx-background-color:transparent");
         transactionBtn.setStyle("-fx-background-color:transparent");
@@ -104,7 +104,7 @@ public class MainController implements Initializable {
         dashboradBtn.setStyle("-fx-background-color:transparent");
         inoutBtn.setStyle("-fx-background-color:transparent");
         productsBtn.setStyle("-fx-background-color:transparent");
-        lowStockBtn.setStyle("-fx-background-color:#00acc1");
+        lowStockBtn.setStyle("-fx-background-color:#3E4345");
         transactionBtn.setStyle("-fx-background-color:transparent");
         settingsBtn.setStyle("-fx-background-color:transparent");
         Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/lowstock.fxml"));
@@ -117,7 +117,7 @@ public class MainController implements Initializable {
         inoutBtn.setStyle("-fx-background-color:transparent");
         productsBtn.setStyle("-fx-background-color:transparent");
         lowStockBtn.setStyle("-fx-background-color:transparent");
-        transactionBtn.setStyle("-fx-background-color:#00acc1");
+        transactionBtn.setStyle("-fx-background-color:#3E4345");
         settingsBtn.setStyle("-fx-background-color:transparent");
         Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/transactions.fxml"));
         borderPane.setCenter(root);
@@ -141,7 +141,7 @@ public class MainController implements Initializable {
         productsBtn.setStyle("-fx-background-color:transparent");
         lowStockBtn.setStyle("-fx-background-color:transparent");
         transactionBtn.setStyle("-fx-background-color:transparent");
-        settingsBtn.setStyle("-fx-background-color:#00acc1");
+        settingsBtn.setStyle("-fx-background-color:#3E4345");
         Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/dbconfig.fxml"));
         borderPane.setCenter(root);
     }

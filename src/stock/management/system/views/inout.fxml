@@ -43,7 +43,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="saveBtn" onAction="#saveTransaction" prefHeight="34.0" prefWidth="91.0" text="Save" />
+                  <JFXButton fx:id="saveBtn" onAction="#saveTransaction" prefHeight="34.0" prefWidth="91.0" style="-fx-background-color: #008080;" text="Save" textFill="WHITE" />
                </children>
                <VBox.margin>
                   <Insets />

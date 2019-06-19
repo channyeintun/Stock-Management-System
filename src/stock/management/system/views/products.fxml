@@ -23,7 +23,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="800.0">
                <children>
-                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#loadNewProductWindow" prefHeight="35.0" prefWidth="81.0" text="Add" />
+                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#loadNewProductWindow" prefHeight="35.0" prefWidth="81.0" style="-fx-background-color: #008080;" text="Add" textFill="WHITE" />
                </children>
             </HBox>
          </children>
