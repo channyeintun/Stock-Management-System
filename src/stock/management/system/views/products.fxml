@@ -13,6 +13,22 @@
 
 <VBox prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stock.management.system.controllers.ProductsController">
    <children>
+      <Button graphicTextGap="12.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+         <graphic>
+            <Button fx:id="CloseApp" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#closeApp" style="-fx-background-color: transparent;">
+               <graphic>
+                  <Button fx:id="CloseApp" alignment="CENTER" graphicTextGap="12.0" mnemonicParsing="false" onAction="#closeApp" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="CLOSE" size="15" text="" />
+                     </graphic>
+                  </Button>
+               </graphic>
+            </Button>
+         </graphic>
+         <VBox.margin>
+            <Insets left="710.0" />
+         </VBox.margin>
+      </Button>
       <HBox prefHeight="80.0" prefWidth="200.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="800.0">
@@ -31,7 +47,7 @@
             <Insets left="40.0" right="40.0" />
          </padding>
       </HBox>
-      <TableView fx:id="productTable" prefHeight="470.0" prefWidth="200.0">
+      <TableView fx:id="productTable" prefHeight="400.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="75.0" text="Product ID" />
           <TableColumn fx:id="nameColumn" onEditCommit="#updateProductName" prefWidth="75.0" text="Product Name" />

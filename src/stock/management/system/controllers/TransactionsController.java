@@ -19,9 +19,11 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -64,6 +66,8 @@ public class TransactionsController implements Initializable {
     private TransactionDAO transactionDAO;
     @FXML
     private JFXButton reportBtn;
+    @FXML
+    private Button CloseApp;
 
     /**
      * Initializes the controller class.
@@ -125,6 +129,12 @@ public class TransactionsController implements Initializable {
         JasperPrint jprint=JasperFillManager.fillReport(jasperReport,new HashMap(),reportSource);
         JasperViewer reportViewer=new JasperViewer(jprint,false);
         reportViewer.setVisible(true);
+    }
+
+    @FXML
+    private void closeApp(ActionEvent event) {
+        Stage stage = (Stage) CloseApp.getScene().getWindow();
+        stage.close();
     }
 
 }

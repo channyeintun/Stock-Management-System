@@ -1,4 +1,3 @@
-
 package stock.management.system.controllers;
 
 import com.jfoenix.controls.JFXTextField;
@@ -56,22 +55,23 @@ public class ProductsController implements Initializable {
     private MenuItem deleteItem;
     @FXML
     private JFXTextField nameSearchField;
+    @FXML
+    private Button CloseApp;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         productDAO = new ProductDAO();
         productTable.setEditable(true);
-       
+
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         priceColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-        
+
         initColumns();
-        
-        
+
         try {
             loadTableData();
         } catch (ClassNotFoundException ex) {
@@ -111,10 +111,8 @@ public class ProductsController implements Initializable {
     @FXML
     private void deleteProduct(ActionEvent event) throws ClassNotFoundException {
 
-      
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
 
-    
         if (selectedProduct == null) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setContentText("Please select the item you want to delete.");
@@ -138,51 +136,51 @@ public class ProductsController implements Initializable {
         }
 
     }
-
     @FXML
     private void updateProductName(TableColumn.CellEditEvent<Product, String> event) throws ClassNotFoundException {
-       
+
         Product product = event.getRowValue();
         product.setName(event.getNewValue());
-        
+
         try {
             productDAO.updateProduct(product);
         } catch (SQLException ex) {
             Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
 
+    }
     @FXML
     private void updateProductPrice(TableColumn.CellEditEvent<Product, Double> event) throws ClassNotFoundException {
-       
-         Product product = event.getRowValue();
-         product.setPrice(event.getNewValue());
-         
+
+        Product product = event.getRowValue();
+        product.setPrice(event.getNewValue());
+
         try {
             productDAO.updateProduct(product);
         } catch (SQLException ex) {
             Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
 
     @FXML
     private void searchProductByName(ActionEvent event) throws ClassNotFoundException {
-       String query = nameSearchField.getText();
-       
+        String query = nameSearchField.getText();
+
         try {
-            List<Product> products  = productDAO.getProductsByName(query);
+            List<Product> products = productDAO.getProductsByName(query);
             productTable.getItems().setAll(products);
         } catch (SQLException ex) {
             Logger.getLogger(ProductsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }
 
-    
+    @FXML
+    private void closeApp(ActionEvent event) {
+        Stage stage = (Stage) CloseApp.getScene().getWindow();
+        stage.close();
+    }
 
-    
 
 }

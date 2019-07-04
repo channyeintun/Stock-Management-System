@@ -1,4 +1,3 @@
-
 package stock.management.system.controllers;
 
 import java.net.URL;
@@ -7,11 +6,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import stock.management.system.dao.ProductDAO;
 import stock.management.system.model.Product;
 
@@ -34,6 +36,8 @@ public class LowStockController implements Initializable {
     private TableColumn<Product, Integer> stockColumn;
 
     private ProductDAO productDAO;
+    @FXML
+    private Button CloseApp;
 
     /**
      * Initializes the controller class.
@@ -63,6 +67,12 @@ public class LowStockController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(LowStockController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void closeApp(ActionEvent event) {
+        Stage stage = (Stage) CloseApp.getScene().getWindow();
+        stage.close();
     }
 
 }

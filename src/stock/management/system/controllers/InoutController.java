@@ -1,4 +1,3 @@
-
 package stock.management.system.controllers;
 
 import com.jfoenix.controls.JFXButton;
@@ -11,8 +10,10 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 import stock.management.system.dao.ProductDAO;
 import stock.management.system.dao.TransactionDAO;
 import stock.management.system.model.Product;
@@ -40,9 +41,11 @@ public class InoutController implements Initializable {
     private RadioButton outRadio;
     @FXML
     private JFXButton saveBtn;
-    
+
     private ProductDAO productDAO;
     private TransactionDAO transactionDAO;
+    @FXML
+    private Button CloseApp;
 
     /**
      * Initializes the controller class.
@@ -59,7 +62,6 @@ public class InoutController implements Initializable {
     @FXML
     private void saveTransaction(ActionEvent event) throws ClassNotFoundException {
 
-      
         String productIdStr = productIdField.getText();
         String quantityStr = quantityField.getText();
         String remark = remarkField.getText();
@@ -72,23 +74,22 @@ public class InoutController implements Initializable {
         try {
             int productId = Integer.parseInt(productIdStr);
             int quantity = Integer.parseInt(quantityStr);
-            
-            String type = (String)transactionTypeGroup.getSelectedToggle().getUserData();
-            
-            if(productDAO.isProductExist(productId)){
-               
-                
+
+            String type = (String) transactionTypeGroup.getSelectedToggle().getUserData();
+
+            if (productDAO.isProductExist(productId)) {
+
                 Product product = productDAO.getProduct(productId);
                 int stock = product.getStock();
-                if(type.equals("IN")){
-                    product.setStock(stock+quantity);
+                if (type.equals("IN")) {
+                    product.setStock(stock + quantity);
                     productDAO.updateProduct(product);
-                }else{
-                    if(quantity<=stock){
-                        product.setStock(stock-quantity);
+                } else {
+                    if (quantity <= stock) {
+                        product.setStock(stock - quantity);
                         productDAO.updateProduct(product);
-                    }else{
-                        MessageBox.showErrorMessage("Input Error","Product Out quantity is greater than stock.");
+                    } else {
+                        MessageBox.showErrorMessage("Input Error", "Product Out quantity is greater than stock.");
                         return;
                     }
                 }
@@ -96,12 +97,12 @@ public class InoutController implements Initializable {
                 transactionDAO.saveTransaction(transaction);
                 MessageBox.showInformationMessage("Success", "Successfully saved.");
                 clearForm();
-            }else{
-                MessageBox.showErrorMessage("Input Error","Product does not exists.");
+            } else {
+                MessageBox.showErrorMessage("Input Error", "Product does not exists.");
             }
-            
+
         } catch (NumberFormatException e) {
-            MessageBox.showErrorMessage("Input Error","Invalid Number.");
+            MessageBox.showErrorMessage("Input Error", "Invalid Number.");
         } catch (SQLException ex) {
             Logger.getLogger(InoutController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -113,6 +114,12 @@ public class InoutController implements Initializable {
         quantityField.clear();
         remarkField.clear();
         inRadio.setSelected(true);
+    }
+
+    @FXML
+    private void closeApp(ActionEvent event) {
+        Stage stage = (Stage) CloseApp.getScene().getWindow();
+        stage.close();
     }
 
 }

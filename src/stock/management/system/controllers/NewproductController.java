@@ -1,4 +1,3 @@
-
 package stock.management.system.controllers;
 
 import com.jfoenix.controls.JFXTextField;
@@ -32,7 +31,7 @@ public class NewproductController implements Initializable {
     private Button cancelBtn;
     @FXML
     private Button saveBtn;
-    
+
     private ProductDAO productDAO;
 
     /**
@@ -45,18 +44,17 @@ public class NewproductController implements Initializable {
 
     @FXML
     private void closeWindow(ActionEvent event) {
-        Stage currentStage = (Stage)saveBtn.getScene().getWindow();
+        Stage currentStage = (Stage) saveBtn.getScene().getWindow();
         currentStage.close();
     }
 
     @FXML
     private void saveNewProduct(ActionEvent event) throws ClassNotFoundException {
-       
+
         String name = nameField.getText();
         String idStr = idField.getText();
         String priceStr = priceField.getText();
 
-       
         if (name.isEmpty() || idStr.isEmpty() || priceStr.isEmpty()) {
             System.out.println("Please Fill out all required fields.");
             return;
@@ -65,9 +63,9 @@ public class NewproductController implements Initializable {
         try {
             int id = Integer.parseInt(idStr);
             double price = Double.parseDouble(priceStr);
-            Product product = new Product(id,name,price,0);
+            Product product = new Product(id, name, price, 0);
             productDAO.save(product);
-            Stage currentStage = (Stage)saveBtn.getScene().getWindow();
+            Stage currentStage = (Stage) saveBtn.getScene().getWindow();
             currentStage.close();
         } catch (NumberFormatException e) {
             System.out.println("Invalid number.");
@@ -75,7 +73,7 @@ public class NewproductController implements Initializable {
             System.out.println("Error,Duplicat ID.");
             Logger.getLogger(NewproductController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }
 
 }

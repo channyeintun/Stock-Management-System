@@ -1,7 +1,5 @@
 package stock.management.system.controllers;
 
-
-
 import stock.management.system.model.DbConfig;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,7 +15,6 @@ import javafx.stage.Stage;
 import stock.management.system.util.DbConfigLoader;
 import stock.management.system.util.MessageBox;
 
-
 public class DbconfigController implements Initializable {
 
     @FXML
@@ -31,7 +28,7 @@ public class DbconfigController implements Initializable {
     @FXML
     private Button saveBtn;
     @FXML
-    private Button cancelBtn;
+    private Button CloseApp;
 
     /**
      * Initializes the controller class.
@@ -41,19 +38,16 @@ public class DbconfigController implements Initializable {
 
         DbConfig dbConfig = DbConfigLoader.loadDbConfig();
 
-        if(dbConfig == null){
+        if (dbConfig == null) {
             SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(3300, 3350, 3306);
             portSpinner.setValueFactory(valueFactory);
-        }else{
+        } else {
             hostField.setText(dbConfig.getHost());
             usernameField.setText(dbConfig.getUser());
             passwordField.setText(dbConfig.getPassword());
             SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(3300, 3350, dbConfig.getPort());
             portSpinner.setValueFactory(valueFactory);
         }
-        
-
-        
 
     }
 
@@ -64,8 +58,14 @@ public class DbconfigController implements Initializable {
         String port = portSpinner.getValue().toString();
         String user = usernameField.getText();
         String password = passwordField.getText();
-        
+
         DbConfigLoader.saveDbConfig(new DbConfig(host, Integer.parseInt(port), user, password));
         MessageBox.showInformationMessage("Saved", "Changed Settings");
+    }
+
+    @FXML
+    private void closeApp(ActionEvent event) {
+        Stage stage = (Stage) CloseApp.getScene().getWindow();
+        stage.close();
     }
 }

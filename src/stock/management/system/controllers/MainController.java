@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import stock.management.system.dao.ProductDAO;
 
 /**
@@ -47,6 +48,8 @@ public class MainController implements Initializable {
     private ProductDAO productDAO;
     @FXML
     private Button settingsBtn;
+    @FXML
+    private Button CloseApp;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -144,6 +147,12 @@ public class MainController implements Initializable {
         settingsBtn.setStyle("-fx-background-color:#3E4345");
         Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/dbconfig.fxml"));
         borderPane.setCenter(root);
+    }
+
+    @FXML
+    private void closeApp(ActionEvent event) {
+        Stage stage = (Stage) CloseApp.getScene().getWindow();
+        stage.close();
     }
 
 }
