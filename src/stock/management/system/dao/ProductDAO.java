@@ -99,8 +99,8 @@ public class ProductDAO {
         String sql = "delete from smsdb.products where id=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, id);
-        int rows = stmt.executeUpdate();
-        return rows;
+        int row = stmt.executeUpdate();
+        return row;
     }
 
     public List<Product> getProductsByName(String query) throws SQLException, ClassNotFoundException {

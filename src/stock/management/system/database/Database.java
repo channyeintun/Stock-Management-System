@@ -54,11 +54,11 @@ public class Database {
 
     public void createTables() throws SQLException {
         Statement stmt1 = conn.createStatement();
-        String sql1 = "create table if not exists smsdb.products (id int primary key,name varchar(60),price double,stock int)";
+        String sql1 = "create table if not exists smsdb.products (id int,name varchar(60),price double,stock int)";
         stmt1.execute(sql1);
 
         Statement stmt2 = conn.createStatement();
-        String sql2 = "create table if not exists smsdb.transactions (id int primary key auto_increment,type varchar(10),product_id int,quantity int,remark varchar(255),date timestamp,foreign key (product_id) references products(id))";
+        String sql2 = "create table if not exists smsdb.transactions (id int primary key auto_increment,type varchar(10),product_id int,quantity int,remark varchar(255),date timestamp)";
         stmt2.execute(sql2);
     }
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="172.0" prefWidth="300.0" style="-fx-background-color: #394158;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stock.management.system.controllers.ConfirmBoxController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../logo/confimity.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="130.0" top="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="301.0" text="Are you sure?" textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="YesBtn" buttonType="RAISED" onAction="#getConfrim" prefWidth="50.0" style="-fx-background-color: #3cc7dc;" text="Yes">
+                     <HBox.margin>
+                        <Insets left="60.0" top="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="NoBtn" buttonType="RAISED" onAction="#CloseConfirm" prefWidth="50.0" style="-fx-background-color: #3cc7dc;" text="No">
+                     <HBox.margin>
+                        <Insets left="85.0" top="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

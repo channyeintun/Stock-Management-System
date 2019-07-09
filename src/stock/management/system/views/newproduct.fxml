@@ -7,21 +7,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="250.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stock.management.system.controllers.NewproductController">
+<AnchorPane id="AnchorPane" prefHeight="250.0" prefWidth="350.0" style="-fx-background-color: #607d8b;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stock.management.system.controllers.NewproductController">
    <children>
       <VBox alignment="CENTER" prefHeight="300.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXTextField fx:id="nameField" labelFloat="true" promptText="Product Name">
+            <JFXTextField fx:id="nameField" focusColor="WHITE" labelFloat="true" promptText="Product Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="#34515e">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="10.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXTextField fx:id="idField" labelFloat="true" layoutX="10.0" layoutY="10.0" promptText="Product ID">
+            <JFXTextField fx:id="idField" focusColor="WHITE" labelFloat="true" layoutX="10.0" layoutY="10.0" promptText="Product ID" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="#34515e">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXTextField fx:id="priceField" labelFloat="true" layoutX="10.0" layoutY="35.0" promptText="Unit Price">
+            <JFXTextField fx:id="priceField" focusColor="WHITE" labelFloat="true" layoutX="10.0" layoutY="35.0" promptText="Unit Price" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="#34515e">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>

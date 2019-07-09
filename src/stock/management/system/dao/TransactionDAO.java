@@ -1,4 +1,3 @@
-
 package stock.management.system.dao;
 
 import java.sql.Connection;
@@ -17,8 +16,8 @@ import stock.management.system.model.Transaction;
  * @author Chan Nyein Tun
  */
 public class TransactionDAO {
-    
-    public int saveTransaction(Transaction transaction) throws SQLException, ClassNotFoundException{
+
+    public int saveTransaction(Transaction transaction) throws SQLException, ClassNotFoundException {
         Connection conn = Database.getInstance().getConnection();
         String sql = "insert into smsdb.transactions (type,product_id,quantity,remark,date) values (?,?,?,?,now())";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -29,37 +28,37 @@ public class TransactionDAO {
         int rows = stmt.executeUpdate();
         return rows;
     }
-    
-    
-    public List<Transaction> getTransactions(Date startDate,Date endDate) throws SQLException, ClassNotFoundException{
-         Connection conn = Database.getInstance().getConnection();
-         String sql = "select transactions.id,transactions.type,products.name,transactions.quantity,transactions.date,transactions.remark from smsdb.transactions left join smsdb.products on transactions.product_id=products.id where date between ? and ?";
-         PreparedStatement stmt = conn.prepareStatement(sql);
-         stmt.setDate(1, startDate);
-         stmt.setDate(2, endDate);
-         ResultSet result = stmt.executeQuery();
-         List<Transaction> transactions = new ArrayList<>();
-         
-         while(result.next()){
-             int id = result.getInt("id");
-             String type = result.getString("type");
-             String productName = result.getString("name");
-             int quantity  = result.getInt("quantity");
-             String remark = result.getString("remark");
-             Timestamp date = result.getTimestamp("date");
-             
-             Transaction transaction = new Transaction(id, type,productName, quantity, remark, date.toString());
-             transactions.add(transaction);
-         }
-         return transactions;
-    }
-     public ResultSet getTransactionResultSet(Date startDate,Date endDate) throws SQLException, ClassNotFoundException{
-         Connection conn = Database.getInstance().getConnection();
-         String sql = "select * from smsdb.transactions left join smsdb.products on transactions.product_id=products.id where date between ? and ?";
-         PreparedStatement stmt = conn.prepareStatement(sql);
-         stmt.setDate(1, startDate);
-         stmt.setDate(2, endDate);
 
-         return stmt.executeQuery();
-     }
+    public List<Transaction> getTransactions(Date startDate, Date endDate) throws SQLException, ClassNotFoundException {
+        Connection conn = Database.getInstance().getConnection();
+        String sql = "select transactions.id,transactions.type,products.name,transactions.quantity,transactions.date,transactions.remark from smsdb.transactions left join smsdb.products on transactions.product_id=products.id where date between ? and ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setDate(1, startDate);
+        stmt.setDate(2, endDate);
+        ResultSet result = stmt.executeQuery();
+        List<Transaction> transactions = new ArrayList<>();
+
+        while (result.next()) {
+            int id = result.getInt("id");
+            String type = result.getString("type");
+            String productName = result.getString("name");
+            int quantity = result.getInt("quantity");
+            String remark = result.getString("remark");
+            Timestamp date = result.getTimestamp("date");
+
+            Transaction transaction = new Transaction(id, type, productName, quantity, remark, date.toString());
+            transactions.add(transaction);
+        }
+        return transactions;
+    }
+
+    public ResultSet getTransactionResultSet(Date startDate, Date endDate) throws SQLException, ClassNotFoundException {
+        Connection conn = Database.getInstance().getConnection();
+        String sql = "select * from smsdb.transactions left join smsdb.products on transactions.product_id=products.id where date between ? and ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setDate(1, startDate);
+        stmt.setDate(2, endDate);
+
+        return stmt.executeQuery();
+    }
 }

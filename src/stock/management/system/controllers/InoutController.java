@@ -2,6 +2,7 @@ package stock.management.system.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -9,16 +10,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import stock.management.system.StockManagementSystem;
 import stock.management.system.dao.ProductDAO;
 import stock.management.system.dao.TransactionDAO;
 import stock.management.system.model.Product;
 import stock.management.system.model.Transaction;
-import stock.management.system.util.MessageBox;
 
 /**
  * FXML Controller class
@@ -60,14 +66,14 @@ public class InoutController implements Initializable {
     }
 
     @FXML
-    private void saveTransaction(ActionEvent event) throws ClassNotFoundException {
+    private void saveTransaction(ActionEvent event) throws ClassNotFoundException, IOException {
 
         String productIdStr = productIdField.getText();
         String quantityStr = quantityField.getText();
         String remark = remarkField.getText();
 
         if (productIdStr.isEmpty() || quantityStr.isEmpty() || remark.isEmpty()) {
-            MessageBox.showErrorMessage("Input Error", "Please fill out all field.");
+            showErrorBox("Please fill all input fields");
             return;
         }
 
@@ -89,20 +95,20 @@ public class InoutController implements Initializable {
                         product.setStock(stock - quantity);
                         productDAO.updateProduct(product);
                     } else {
-                        MessageBox.showErrorMessage("Input Error", "Product Out quantity is greater than stock.");
+                        showErrorBox("Product does not exist!");
                         return;
                     }
                 }
                 Transaction transaction = new Transaction(type, productId, quantity, remark);
                 transactionDAO.saveTransaction(transaction);
-                MessageBox.showInformationMessage("Success", "Successfully saved.");
+                showSuccessBox();
                 clearForm();
             } else {
-                MessageBox.showErrorMessage("Input Error", "Product does not exists.");
+                showErrorBox("Product does not exit!");
             }
 
         } catch (NumberFormatException e) {
-            MessageBox.showErrorMessage("Input Error", "Invalid Number.");
+            showErrorBox("Invalid Number!");
         } catch (SQLException ex) {
             Logger.getLogger(InoutController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,6 +126,29 @@ public class InoutController implements Initializable {
     private void closeApp(ActionEvent event) {
         Stage stage = (Stage) CloseApp.getScene().getWindow();
         stage.close();
+    }
+
+    private void showErrorBox(String text) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/stock/management/system/views/ErrorBox.fxml"));
+        Parent root = loader.load();
+        ErrorBoxController controller = loader.getController();
+        controller.setErrorLBL(text);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
+    }
+
+    private void showSuccessBox() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/stock/management/system/views/AlertBox.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(StockManagementSystem.class.getResourceAsStream("/stock/management/system/logo/logo.png")));
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
     }
 
 }

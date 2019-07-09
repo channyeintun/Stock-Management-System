@@ -1,10 +1,9 @@
-
 package stock.management.system.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import java.io.IOException;
 import java.io.InputStream;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.Date;
@@ -18,12 +17,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -33,12 +36,11 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 import stock.management.system.dao.TransactionDAO;
 import stock.management.system.model.Transaction;
-import stock.management.system.util.MessageBox;
 
 /**
  * FXML Controller class
  *
- * @author Chan Nyein Tun   
+ * @author Chan Nyein Tun
  */
 public class TransactionsController implements Initializable {
 
@@ -79,21 +81,20 @@ public class TransactionsController implements Initializable {
     }
 
     @FXML
-    private void loadTransactions(ActionEvent event) throws ClassNotFoundException {
-       
+    private void loadTransactions(ActionEvent event) throws ClassNotFoundException, IOException {
+
         LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
 
-        
         if (startDate == null || endDate == null) {
-            MessageBox.showErrorMessage("Error", "Select the start date and end date.");
+            showErrorBox("Select start date and end date");
             return;
         }
         Date startSqlDate = Date.valueOf(startDate);
         Date endSqlDate = Date.valueOf(endDate.plusDays(1));
         try {
-           
-            List<Transaction> transactions = transactionDAO.getTransactions(startSqlDate,endSqlDate);
+
+            List<Transaction> transactions = transactionDAO.getTransactions(startSqlDate, endSqlDate);
             transactionTable.getItems().setAll(transactions);
         } catch (SQLException ex) {
             Logger.getLogger(TransactionsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,24 +111,24 @@ public class TransactionsController implements Initializable {
     }
 
     @FXML
-    private void getReport(ActionEvent event) throws SQLException, ClassNotFoundException, JRException, UnsupportedEncodingException {
-         LocalDate startDate = startDatePicker.getValue();
+    private void getReport(ActionEvent event) throws SQLException, ClassNotFoundException, JRException, UnsupportedEncodingException, IOException {
+        LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
 
         // validating
         if (startDate == null || endDate == null) {
-            MessageBox.showErrorMessage("Error", "Select the start date and end date.");
+            showErrorBox("Select start date and end date.");
             return;
         }
         Date startSqlDate = Date.valueOf(startDate);
         Date endSqlDate = Date.valueOf(endDate.plusDays(1));
-        ResultSet resultSet=transactionDAO.getTransactionResultSet(startSqlDate, endSqlDate);
-        JRResultSetDataSource reportSource=new JRResultSetDataSource(resultSet);
-        InputStream is=this.getClass().getResourceAsStream("/stock/management/system/report/report1.jrxml");
-     
+        ResultSet resultSet = transactionDAO.getTransactionResultSet(startSqlDate, endSqlDate);
+        JRResultSetDataSource reportSource = new JRResultSetDataSource(resultSet);
+        InputStream is = this.getClass().getResourceAsStream("/stock/management/system/report/report1.jrxml");
+
         JasperReport jasperReport = JasperCompileManager.compileReport(is);
-        JasperPrint jprint=JasperFillManager.fillReport(jasperReport,new HashMap(),reportSource);
-        JasperViewer reportViewer=new JasperViewer(jprint,false);
+        JasperPrint jprint = JasperFillManager.fillReport(jasperReport, new HashMap(), reportSource);
+        JasperViewer reportViewer = new JasperViewer(jprint, false);
         reportViewer.setVisible(true);
     }
 
@@ -135,6 +136,18 @@ public class TransactionsController implements Initializable {
     private void closeApp(ActionEvent event) {
         Stage stage = (Stage) CloseApp.getScene().getWindow();
         stage.close();
+    }
+
+    private void showErrorBox(String text) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/stock/management/system/views/ErrorBox.fxml"));
+        Parent root = loader.load();
+        ErrorBoxController controller = loader.getController();
+        controller.setErrorLBL(text);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
     }
 
 }

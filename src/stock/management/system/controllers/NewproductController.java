@@ -1,6 +1,7 @@
 package stock.management.system.controllers;
 
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -8,9 +9,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import stock.management.system.dao.ProductDAO;
 import stock.management.system.model.Product;
 
@@ -49,14 +54,14 @@ public class NewproductController implements Initializable {
     }
 
     @FXML
-    private void saveNewProduct(ActionEvent event) throws ClassNotFoundException {
+    private void saveNewProduct(ActionEvent event) throws ClassNotFoundException, IOException {
 
         String name = nameField.getText();
         String idStr = idField.getText();
         String priceStr = priceField.getText();
 
         if (name.isEmpty() || idStr.isEmpty() || priceStr.isEmpty()) {
-            System.out.println("Please Fill out all required fields.");
+            showErrorBox("Please fill all input fields");
             return;
         }
 
@@ -74,6 +79,18 @@ public class NewproductController implements Initializable {
             Logger.getLogger(NewproductController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    private void showErrorBox(String text) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/stock/management/system/views/ErrorBox.fxml"));
+        Parent root = loader.load();
+        ErrorBoxController controller = loader.getController();
+        controller.setErrorLBL(text);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
     }
 
 }
