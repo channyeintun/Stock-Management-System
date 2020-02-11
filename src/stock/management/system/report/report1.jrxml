@@ -32,7 +32,7 @@
 			<staticText>
 				<reportElement x="249" y="23" width="249" height="32" uuid="0d7859c0-7e3b-4254-a55d-5861ec2d997e"/>
 				<textElement>
-					<font fontName="Pyidaungsu" size="20"/>
+					<font size="20"/>
 				</textElement>
 				<text><![CDATA[Product Transaction Report]]></text>
 			</staticText>
@@ -50,35 +50,35 @@
 			<staticText>
 				<reportElement x="113" y="22" width="100" height="20" uuid="d3ccbf7b-5952-4d71-a7c9-fc87a1041272"/>
 				<textElement>
-					<font fontName="Pyidaungsu"/>
+					
 				</textElement>
 				<text><![CDATA[Type]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="218" y="22" width="100" height="20" uuid="c03ad606-9f9c-49a8-92ca-fee91cca30bb"/>
 				<textElement>
-					<font fontName="Pyidaungsu"/>
+					
 				</textElement>
 				<text><![CDATA[Product_ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="323" y="22" width="100" height="20" uuid="6028a345-a3d5-47aa-af7e-5622038fbe8d"/>
 				<textElement>
-					<font fontName="Pyidaungsu"/>
+					
 				</textElement>
 				<text><![CDATA[Quantity]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="428" y="22" width="100" height="20" uuid="414121c9-ead2-4ab1-afee-ce78041f2d06"/>
 				<textElement>
-					<font fontName="Pyidaungsu"/>
+					
 				</textElement>
 				<text><![CDATA[Remark]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="533" y="22" width="100" height="20" uuid="73beed60-9ee0-48ae-bcf1-0acf143fcf7f"/>
 				<textElement>
-					<font fontName="Pyidaungsu"/>
+					
 				</textElement>
 				<text><![CDATA[Date]]></text>
 			</staticText>
@@ -93,7 +93,7 @@
 			<textField>
 				<reportElement x="113" y="0" width="100" height="20" uuid="30fc402e-87b7-422f-95b4-3bae4f2ccbbf"/>
 				<textElement>
-					<font fontName="Pyidaungsu"/>
+					
 				</textElement>
 				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
 			</textField>
@@ -104,21 +104,21 @@
 			<textField>
 				<reportElement x="428" y="0" width="100" height="20" uuid="bfcfce03-7775-4b1d-a7f8-c0234c4581bb"/>
 				<textElement>
-					<font fontName="Pyidaungsu"/>
+					
 				</textElement>
 				<textFieldExpression><![CDATA[$F{remark}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="533" y="0" width="100" height="20" uuid="13daf0fd-88f7-4e8e-b493-4d86301ec492"/>
 				<textElement>
-					<font fontName="Pyidaungsu"/>
+					
 				</textElement>
 				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="323" y="0" width="100" height="20" uuid="9c62ce4b-5064-42dc-b1d8-2d6227dde93e"/>
 				<textElement>
-					<font fontName="Pyidaungsu"/>
+					
 				</textElement>
 				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
 			</textField>
